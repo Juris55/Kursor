@@ -20,12 +20,12 @@
 
 ## 📸 Screenshots
 
+<!-- Attēli tiks pievienoti pēc pirmās stabilās versijas izlaišanas -->
+<!-- Images will be added after the first stable release -->
+<!-- Изображения будут добавлены после первого стабильного релиза -->
+
 <p align="center">
-  <img src="screenshots/editor.png" width="400" />
-  <img src="screenshots/chat.png" width="400" />
-  <br/>
-  <img src="screenshots/settings.png" width="400" />
-  <img src="screenshots/terminal.png" width="400" />
+  <i>📷 Screenshots coming soon — after the first stable release</i>
 </p>
 
 ---
