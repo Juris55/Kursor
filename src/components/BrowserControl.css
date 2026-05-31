@@ -1,0 +1,281 @@
+/* Browser Control Overlay Styles */
+
+.browser-control-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+  z-index: 9998;
+}
+
+.browser-control-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+}
+
+.browser-control-toggle:active {
+  transform: translateY(0);
+}
+
+.browser-control-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.browser-control-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.browser-control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.browser-control-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-icon {
+  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.browser-control-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.browser-control-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.browser-control-content {
+  padding: 20px;
+}
+
+.action-info {
+  margin-bottom: 16px;
+}
+
+.current-action {
+  margin: 0 0 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.current-action .label {
+  font-weight: 600;
+  color: #34495e;
+}
+
+.current-action .value {
+  color: #3498db;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.message {
+  margin: 0;
+  font-size: 13px;
+  color: #7f8c8d;
+  line-height: 1.5;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-bottom: 16px;
+}
+
+.progress-stats span:last-child {
+  font-weight: 600;
+  color: #34495e;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.btn-stop {
+  flex: 1;
+  padding: 10px 16px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-stop:hover:not(:disabled) {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.btn-stop:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.controls-info {
+  background: #ecf0f1;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #34495e;
+  line-height: 1.6;
+}
+
+.controls-info p {
+  margin: 0;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .browser-control-container {
+    background: #2c3e50;
+    color: #ecf0f1;
+  }
+
+  .current-action {
+    color: #ecf0f1;
+  }
+
+  .current-action .label {
+    color: #bdc3c7;
+  }
+
+  .current-action .value {
+    color: #3498db;
+  }
+
+  .message {
+    color: #95a5a6;
+  }
+
+  .progress-bar {
+    background: #34495e;
+  }
+
+  .progress-stats {
+    color: #95a5a6;
+  }
+
+  .progress-stats span:last-child {
+    color: #ecf0f1;
+  }
+
+  .controls-info {
+    background: #34495e;
+    color: #bdc3c7;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .browser-control-container {
+    width: 95%;
+    max-width: 90vw;
+  }
+
+  .browser-control-toggle {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
