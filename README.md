@@ -20,12 +20,8 @@
 
 ## 📸 Screenshots
 
-<!-- Attēli tiks pievienoti pēc pirmās stabilās versijas izlaišanas -->
-<!-- Images will be added after the first stable release -->
-<!-- Изображения будут добавлены после первого стабильного релиза -->
-
 <p align="center">
-  <i>📷 Screenshots coming soon — after the first stable release</i>
+  <img src="screenshots/editor.png" width="600" />
 </p>
 
 ---
