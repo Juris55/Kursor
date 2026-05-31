@@ -26,6 +26,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Vite build
+        run: npx vite build
+
       - name: Build Windows ${{ matrix.arch }}
         run: npx electron-builder --win --${{ matrix.arch }}
         env:
@@ -50,6 +53,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Vite build
+        run: npx vite build
+
       - name: Build macOS ${{ matrix.arch }}
         run: npx electron-builder --mac --${{ matrix.arch }}
 
@@ -71,6 +77,9 @@ jobs:
           node-version: 20
 
       - run: npm ci
+
+      - name: Vite build
+        run: npx vite build
 
       - name: Build Linux ${{ matrix.arch }}
         run: npx electron-builder --linux --${{ matrix.arch }}
