@@ -33,7 +33,7 @@ jobs:
         run: npx vite build
 
       - name: Build Windows ${{ matrix.arch }}
-        run: npx electron-builder --win --${{ matrix.arch }}
+        run: npx electron-builder --win --${{ matrix.arch }} --publish never
         env:
           npm_config_arch: ${{ matrix.arch }}
 
@@ -60,7 +60,7 @@ jobs:
         run: npx vite build
 
       - name: Build macOS ${{ matrix.arch }}
-        run: npx electron-builder --mac --${{ matrix.arch }}
+        run: npx electron-builder --mac --${{ matrix.arch }} --publish never
 
       - uses: actions/upload-artifact@v4
         with:
@@ -90,7 +90,7 @@ jobs:
         run: npx vite build
 
       - name: Build Linux ${{ matrix.arch }}
-        run: npx electron-builder --linux --${{ matrix.arch }}
+        run: npx electron-builder --linux --${{ matrix.arch }} --publish never
 
       - uses: actions/upload-artifact@v4
         with:
