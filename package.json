@@ -1,6 +1,7 @@
 {
   "name": "kursor",
   "version": "2.0.0",
+  "author": "Juris55 <juris55@gmail.com>",
   "description": "Kursor - Latviešu teksta redaktors ar AI atbalstu",
   "main": "dist-electron/main.js",
   "scripts": {
