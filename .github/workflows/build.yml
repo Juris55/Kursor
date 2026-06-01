@@ -1,0 +1,122 @@
+name: Build Kursor
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        arch: [x64, arm64, ia32]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Vite build
+        run: npx vite build
+
+      - name: Build Windows ${{ matrix.arch }}
+        run: npx electron-builder --win --${{ matrix.arch }} --publish never
+        env:
+          npm_config_arch: ${{ matrix.arch }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kursor-Windows-${{ matrix.arch }}
+          path: release/*.exe
+
+  build-macos:
+    runs-on: ${{ matrix.arch == 'arm64' && 'macos-14' || 'macos-13' }}
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Vite build
+        run: npx vite build
+
+      - name: Build macOS ${{ matrix.arch }}
+        run: npx electron-builder --mac --${{ matrix.arch }} --publish never
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kursor-macOS-${{ matrix.arch }}
+          path: release/*.{dmg,zip}
+
+  build-linux:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libc6-dev
+
+      - run: npm ci
+
+      - name: Vite build
+        run: npx vite build
+
+      - name: Build Linux ${{ matrix.arch }}
+        run: npx electron-builder --linux --${{ matrix.arch }} --publish never
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kursor-Linux-${{ matrix.arch }}
+          path: release/*.{AppImage,deb}
+
+  create-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: Kursor-*
+          merge-multiple: true
+
+      - name: Generate checksums
+        run: sha256sum * > checksums.txt
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            Kursor-Setup-*.exe
+            Kursor-*.dmg
+            Kursor-*.zip
+            Kursor-*.AppImage
+            Kursor-*.deb
+            checksums.txt
+          generate_release_notes: true
